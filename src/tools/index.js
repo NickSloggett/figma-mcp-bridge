@@ -60,6 +60,7 @@ import {
   handleCreateTextStyle,
   handleCreateVariableCollection,
   handleCreateVariable,
+  handleRenameVariable,
   // Page Management commands
   handleCreatePage,
   handleRenamePage,
@@ -893,6 +894,17 @@ export function registerTools(server, bridge) {
       ])).optional().describe('Where this variable can be used')
     },
     async (args) => handleCreateVariable(bridge, args)
+  );
+
+  // figma_rename_variable - Rename an existing variable
+  server.tool(
+    'figma_rename_variable',
+    'Rename an existing variable. Use "/" in the name to organize into groups (e.g., "font weight/heading/h1").',
+    {
+      variableId: z.string().describe('The variable ID to rename'),
+      name: z.string().describe('The new name for the variable (use "/" for groups)')
+    },
+    async (args) => handleRenameVariable(bridge, args)
   );
 
   // ============================================================

@@ -2819,6 +2819,66 @@ export async function handleCreateVariable(bridge, args) {
   }
 }
 
+/**
+ * Rename an existing variable
+ */
+export async function handleRenameVariable(bridge, args) {
+  if (!bridge.isConnected()) {
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          error: {
+            code: 'NOT_CONNECTED',
+            message: 'Figma plugin is not connected.'
+          }
+        }, null, 2)
+      }],
+      isError: true
+    };
+  }
+
+  const { variableId, name } = args;
+
+  if (!variableId || !name) {
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          error: {
+            code: 'INVALID_PARAMS',
+            message: 'variableId and name are required'
+          }
+        }, null, 2)
+      }],
+      isError: true
+    };
+  }
+
+  try {
+    const result = await bridge.sendCommand('rename_variable', args);
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify(result, null, 2)
+      }]
+    };
+  } catch (error) {
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          error: {
+            code: error.code || 'UNKNOWN_ERROR',
+            message: error.message
+          }
+        }, null, 2)
+      }],
+      isError: true
+    };
+  }
+}
+
 // ============================================================
 // Page Management Commands
 // ============================================================

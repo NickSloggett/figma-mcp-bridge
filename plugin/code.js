@@ -161,6 +161,8 @@ async function handleCommand(command, payload) {
       return await createVariableCollection(payload);
     case 'create_variable':
       return await createVariable(payload);
+    case 'rename_variable':
+      return await renameVariable(payload);
     // Page Management commands
     case 'create_page':
       return await createPage(payload);
@@ -2834,6 +2836,28 @@ async function createVariable({ collectionId, name, type, value, aliasOf, descri
     type: variable.resolvedType,
     collectionId: collection.id,
     collectionName: collection.name
+  };
+}
+
+/**
+ * Rename an existing variable
+ */
+async function renameVariable({ variableId, name }) {
+  var variable = await figma.variables.getVariableByIdAsync(variableId);
+  if (!variable) {
+    throw new Error('Variable not found: ' + variableId);
+  }
+
+  var oldName = variable.name;
+  variable.name = name;
+
+  return {
+    success: true,
+    variableId: variable.id,
+    oldName: oldName,
+    newName: variable.name,
+    key: variable.key,
+    type: variable.resolvedType
   };
 }
 
