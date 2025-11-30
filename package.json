@@ -1,0 +1,42 @@
+{
+  "name": "@magic-spells/figma-mcp-bridge",
+  "version": "0.1.0",
+  "description": "MCP server enabling Claude to read and manipulate Figma documents via WebSocket bridge",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "figma-mcp-bridge": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "figma",
+    "mcp",
+    "claude",
+    "model-context-protocol",
+    "ai",
+    "design"
+  ],
+  "author": "Magic Spells",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magic-spells/figma-mcp-bridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/magic-spells/figma-mcp-bridge/issues"
+  },
+  "homepage": "https://github.com/magic-spells/figma-mcp-bridge#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "src",
+    "plugin"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "ws": "^8.14.0"
+  }
+}

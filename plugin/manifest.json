@@ -1,0 +1,21 @@
+{
+  "name": "Claude Figma Bridge",
+  "id": "claude-figma-bridge",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma", "figjam"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["none"],
+    "devAllowedDomains": [
+      "ws://localhost:3055",
+      "ws://localhost:3056",
+      "ws://localhost:3057",
+      "ws://localhost:3058",
+      "ws://localhost:3059",
+      "ws://localhost:3060"
+    ]
+  },
+  "permissions": ["currentuser"]
+}
