@@ -14,7 +14,17 @@
       "ws://localhost:3057",
       "ws://localhost:3058",
       "ws://localhost:3059",
-      "ws://localhost:3060"
+      "ws://localhost:3060",
+      "ws://localhost:3061",
+      "ws://localhost:3062",
+      "ws://localhost:3063",
+      "ws://localhost:3064",
+      "ws://localhost:3065",
+      "ws://localhost:3066",
+      "ws://localhost:3067",
+      "ws://localhost:3068",
+      "ws://localhost:3069",
+      "ws://localhost:3070"
     ]
   },
   "permissions": ["currentuser"]

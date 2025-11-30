@@ -38,18 +38,20 @@ async function main() {
 
   console.error(`[FigmaMCP] MCP server running on port ${PORT}. Waiting for Figma plugin connection...`);
 
-  // Handle graceful shutdown
-  process.on('SIGINT', async () => {
-    console.error('[FigmaMCP] Shutting down...');
+  // Graceful shutdown helper
+  const shutdown = async (reason) => {
+    console.error(`[FigmaMCP] Shutting down (${reason})...`);
     await bridge.stop();
     process.exit(0);
-  });
+  };
 
-  process.on('SIGTERM', async () => {
-    console.error('[FigmaMCP] Shutting down...');
-    await bridge.stop();
-    process.exit(0);
-  });
+  // Handle graceful shutdown
+  process.on('SIGINT', () => shutdown('SIGINT'));
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+
+  // Handle stdio close (when Claude closes the connection)
+  process.stdin.on('close', () => shutdown('stdin closed'));
+  transport.onclose = () => shutdown('transport closed');
 }
 
 main().catch((error) => {

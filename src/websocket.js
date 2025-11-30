@@ -19,7 +19,7 @@ export class FigmaBridge extends EventEmitter {
   }
 
   async start() {
-    const maxPort = DEFAULT_PORT + 5;
+    const maxPort = DEFAULT_PORT + 15;
 
     const tryPort = (port) => {
       return new Promise((resolve, reject) => {
