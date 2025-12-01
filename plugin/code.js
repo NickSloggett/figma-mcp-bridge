@@ -3274,7 +3274,11 @@ function serializeNode(node, depth) {
   }
 
   if (node.type === 'COMPONENT') {
-    base.componentPropertyDefinitions = clone(node.componentPropertyDefinitions);
+    // Only access componentPropertyDefinitions for non-variant components
+    // (variant components inside a COMPONENT_SET don't support this property)
+    if (!node.parent || node.parent.type !== 'COMPONENT_SET') {
+      base.componentPropertyDefinitions = clone(node.componentPropertyDefinitions);
+    }
   }
   // Skip mainComponent for now - requires async which complicates serialization
   if (node.type === 'INSTANCE') {
